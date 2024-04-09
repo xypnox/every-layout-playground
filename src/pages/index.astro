@@ -1,10 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Box from '../primitives/box.astro';
+import { readFileAsString } from '../lib/files';
+import { Code } from 'astro:components';
+
+const files = [
+  {
+    Component: Box,
+    path: 'src/primitives/box.astro',
+  }
+]
+
+const fileCodes = await Promise.all(files.map(async (file) => {
+  // Import the file as string
+  const file2 = await readFileAsString(file.path);
+  console.log({ file2 });
+  return file2;
+}));
+
 ---
 
 <Layout title="Every Layout Playground">
 	<main>
 		<h1>Every Layout Playground</h1>
+    {files.map((file, index) => (
+      <div class="split-show">
+        <div>
+          <file.Component key={index} />
+        </div>
+        <div>
+          <p>file: {file.path}</p>
+          <Code lang="astro" code={fileCodes[index]} />
+        </div>
+      </div>
+    ))}
 	</main>
 </Layout>
 
@@ -13,4 +42,17 @@ import Layout from '../layouts/Layout.astro';
 		margin: auto;
 		padding: 1rem;
 	}
+  .split-show {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .split-show pre {
+    background-color: #666;
+    border: 1px solid #333;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow: auto;
+  }
 </style>

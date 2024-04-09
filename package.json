@@ -10,8 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.17",
     "@astrojs/check": "^0.5.10",
+    "astro": "^4.5.17",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
     "typescript": "^5.4.4"
   }
 }
