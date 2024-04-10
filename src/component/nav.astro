@@ -1,0 +1,51 @@
+---
+import { getFolders } from '../lib/files';
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const folders = await getFolders('src/primitives');
+const paths = folders.map((folder) => ({
+   slug: 'primitives/' + folder,
+    folder: folder,
+}));
+
+const isActive = (path) => pathname.includes(path.slug);
+---
+
+<nav>
+  <a href="/"
+    class={pathname === '/' ? 'active' : ''}
+  >Every Layout Playground</a>
+  <div>
+    {paths.map((path) => (
+      <a href={`/chapters/${path.slug}`}
+        class={isActive(path) ? 'active' : ''}
+      >{path.folder}</a>
+    ))}
+  </div>
+</nav>
+
+<style>
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  z-index: 10;
+  background: #000;
+  width: calc(100% - 2px);
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+}
+
+a {
+  padding: 0.5rem;
+}
+
+a.active {
+  background: #222;
+}
+</style>

@@ -1,4 +1,6 @@
 ---
+import Nav from '../component/nav.astro';
+
 interface Props {
 	title: string;
 }
@@ -17,15 +19,23 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+    <Nav />
+    <main>
+      <slot />
+    </main>
 	</body>
 </html>
+
 <style is:global>
 	html {
 		font-family: system-ui, sans-serif;
     color: #fff;
     background-color: #000;
 	}
+  body {
+    margin: 0;
+    padding: 0;
+  }
   * {
     box-sizing: border-box;
   }
@@ -50,4 +60,18 @@ const { title } = Astro.props;
     height: 1rem;
     border-radius: 50%;
   }
+  a {
+    color: #fff;
+  }
+	main {
+		margin: auto;
+		padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-inline: auto;
+    max-width: 100%;
+    align-items: center;
+  }
+
 </style>

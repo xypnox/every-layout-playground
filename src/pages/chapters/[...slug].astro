@@ -1,26 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { readFileAsString } from '../lib/files';
+import Layout from '../../layouts/Layout.astro';
+import { getFolders, readFileAsString } from '../../lib/files';
 import { Code } from 'astro:components';
 
-const readFile = async (file:string) => {
-  const contents = await readFileAsString(file);
-  return contents;
-}
+export const getStaticPaths = (async () => {
+  const folders = await getFolders('src/primitives');
+  const paths = folders.map((folder) => ({
+    params: { slug: 'primitives/' + folder },
+  }));
+  return paths;
+});
 
+const { slug } = Astro.params;
 
-const files = await Astro.glob('../primitives/**/*.astro');
-// console.log(files);
+const filesAll = await Astro.glob('../../primitives/**/*.astro');
+const files = filesAll.filter((file) => file.file.includes(slug ?? ''));
 
-const files2 = await Promise.all(files.map(async (file) => {
-  const contents = await readFile(file.file);
+const fileContents = await Promise.all(files.map(async (file) => {
+  const contents = await readFileAsString(file.file);
   return contents;
 }));
-
 ---
 
-<Layout title="Every Layout Playground">
-  <h1>Every Layout Playground</h1>
+<Layout title={slug ?? 'Chapter'}>
   {files.map((item, index) => (
     <>
     <div class="split-show">
@@ -28,7 +30,7 @@ const files2 = await Promise.all(files.map(async (file) => {
         <item.default />
       </div>
       <div class="split-code">
-        <Code code={files2[index]} lang="astro" />
+        <Code code={fileContents[index]} lang="astro" />
       </div>
     </div>
     {index !== files.length - 1 && <hr />}
