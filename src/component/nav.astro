@@ -17,7 +17,10 @@ const isActive = (path: string) => pathname.includes(path);
   <div class="innerWrapper">
     <a href="/"
       class={pathname === '/' ? 'active' : ''}
-    >Every Layout Playground</a>
+    >
+      <img src="/favicon.svg" alt="Every Layout" />
+      <span>Every Layout Playground</span>
+    </a>
     <div class="links">
       {paths.map((path) => (
         <a href={`/chapters/${path.slug}`}
@@ -49,6 +52,18 @@ nav {
   height: 3rem;
 }
 
+.innerWrapper a img {
+  height: 2rem;
+  width: 2rem;
+}
+
+
+a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .links {
   display: flex;
   gap: 1rem;
@@ -59,11 +74,18 @@ nav {
     justify-content: space-between;
   }
 
+  .innerWrapper {
+    gap: 0.5rem;
+  }
+
   .links a {
     display: none;
   }
   .links a.active {
     display: block;
+  }
+  .innerWrapper a span {
+    display: none;
   }
 }
 
