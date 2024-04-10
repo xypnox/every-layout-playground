@@ -2,9 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import { readFileAsString } from '../lib/files';
 import { Code } from 'astro:components';
-import Render from '../component/render.astro'
-
-// const contents = await getContents('src/primitives/', 'astro');
 
 const readFile = async (file:string) => {
   const contents = await readFileAsString(file);
@@ -13,7 +10,7 @@ const readFile = async (file:string) => {
 
 
 const files = await Astro.glob('../primitives/**/*.astro');
-console.log(files);
+// console.log(files);
 
 const files2 = await Promise.all(files.map(async (file) => {
   const contents = await readFile(file.file);
