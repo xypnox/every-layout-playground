@@ -1,0 +1,53 @@
+<div>
+  <h3>Block</h3>
+  <div class="block-box">
+    The block is large and takes up the whole width.
+  </div>
+
+  <h3>Inline No Padding</h3>
+  <p class="short-p">
+    The Inline Block exists inside the text.
+    The text could be very very large in size. For example it could contain a lot of words to <span class="inline-box-no">correctly</span> understand the wrapping and surrounding affects of the blocks.
+  </p>
+
+  <h3>Inline</h3>
+  <p class="short-p">
+    The Inline Block exists inside the text.
+    The text could be very very large in size. For example it could contain a lot of words to <span class="inline-box">correctly</span> understand the wrapping and surrounding affects of the blocks.
+  </p>
+
+  <h3>Inline Block</h3>
+  <p class="short-p">
+    The Inline Block exists inside the text.
+    The text could be very very large in size. For example it could contain a lot of words to <span class="inline-block-box">correctly</span> understand the wrapping and surrounding affects of the blocks.
+  </p>
+</div>
+
+
+<style>
+  .block-box {
+    background-color: #222;
+    border: 1px solid #666;
+    padding: 1rem;
+  }
+
+  .inline-box {
+    display: inline;
+    border: 1px solid #666;
+    padding: 0.5rem;
+  }
+
+  .inline-box-no {
+    display: inline;
+    border: 1px solid #666;
+  }
+
+  .inline-block-box {
+    display: inline-block;
+    border: 1px solid #666;
+    padding: 0.5rem;
+  }
+  .short-p {
+    max-width: 60ch;
+  }
+</style>

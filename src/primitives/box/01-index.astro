@@ -1,0 +1,52 @@
+---
+const colors = {
+  content: '#666',
+  'padding': '#555',
+  'border': '#444',
+  'margin': '#333',
+}
+---
+
+<div>
+  <h2>Box</h2>
+
+  <div class="box-wrapper">
+    <div class="box">
+      <div class="content">
+        This is a box.
+      </div>
+    </div>
+  </div>
+  <div>
+    {Object.entries( colors ).map(([name, color]) => 
+        <div class="color-swatch">
+          <div
+            class="swatch"
+            style={`background-color: ${color};`}
+          />
+          {name}
+        </div>
+    )}
+  </div>
+  <p>The content is the part that the box </p>
+</div>
+
+<style define:vars={colors}>
+  .box-wrapper {
+    background-color: var(--margin);
+    border: 1px solid transparent;
+    margin: 0;
+  }
+  .box {
+    background-color: var(--padding);
+    border: 1rem solid var(--border);
+    border-radius: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+    display: block;
+  }
+  .box .content {
+    background-color: var(--content);
+  }
+</style>
+

@@ -1,39 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Box from '../primitives/box.astro';
 import { readFileAsString } from '../lib/files';
 import { Code } from 'astro:components';
+import Render from '../component/render.astro'
 
-const files = [
-  {
-    Component: Box,
-    path: 'src/primitives/box.astro',
-  }
-]
+// const contents = await getContents('src/primitives/', 'astro');
 
-const fileCodes = await Promise.all(files.map(async (file) => {
-  // Import the file as string
-  const file2 = await readFileAsString(file.path);
-  console.log({ file2 });
-  return file2;
+const readFile = async (file:string) => {
+  const contents = await readFileAsString(file);
+  return contents;
+}
+
+
+const files = await Astro.glob('../primitives/**/*.astro');
+console.log(files);
+
+const files2 = await Promise.all(files.map(async (file) => {
+  const contents = await readFile(file.file);
+  return contents;
 }));
 
 ---
 
 <Layout title="Every Layout Playground">
 	<main>
-		<h1>Every Layout Playground</h1>
-    {files.map((file, index) => (
-      <div class="split-show">
-        <div>
-          <file.Component key={index} />
+    <div class="content">
+      <h1>Every Layout Playground</h1>
+      {files.map((item, index) => (
+        <>
+        <div class="split-show">
+          <div class="split-preview">
+            <item.default />
+          </div>
+          <div class="split-code">
+            <Code code={files2[index]} lang="astro" />
+          </div>
         </div>
-        <div>
-          <p>file: {file.path}</p>
-          <Code lang="astro" code={fileCodes[index]} />
-        </div>
-      </div>
-    ))}
+        {index !== files.length - 1 && <hr />}
+        </>
+      ))} 
+    </div>
 	</main>
 </Layout>
 
@@ -42,17 +48,47 @@ const fileCodes = await Promise.all(files.map(async (file) => {
 		margin: auto;
 		padding: 1rem;
 	}
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-inline: auto;
+    max-width: 100%;
+    align-items: center;
+  }
+
   .split-show {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .split-preview {
+    max-width: 80ch;
+    width: 100%;
+  }
+
+  .split-code {
+    width: 60ch;
+    max-width: 100%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: 40rem;
+    overflow: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
 
-  .split-show pre {
+  .split-code pre {
     background-color: #666;
-    border: 1px solid #333;
+    border: 1px solid #ffffff10;
     padding: 1rem;
+    margin: 0;
     border-radius: 5px;
-    overflow: auto;
   }
 </style>

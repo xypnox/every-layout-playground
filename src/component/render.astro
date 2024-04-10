@@ -1,0 +1,79 @@
+---
+import type { Item } from '../lib/files'
+import { Code } from 'astro:components';
+
+interface Props {
+  item: Item
+}
+
+const { item } = Astro.props;
+
+let FComponent = undefined;
+
+if (item.type === 'file') {
+  const comp = await import(/* @vite-ignore */`../../${item.path}`);
+  // console.log(item.path, `../../${item.path}`, {comp})
+  FComponent = comp.default;
+  // console.log({FComponent})
+}
+---
+
+<div class="item">
+  <div class="info">
+    <h2>{item.name}</h2>
+    <p>{item.path}</p>
+  </div>
+  {item.type === 'file' ? (
+    <div class="split-show">
+    {FComponent ? (
+        <div class="split-preview">
+          <FComponent />
+        </div>
+    ) : (
+      <p>Component not found</p>
+    )}
+      <div class="split-code">
+        <Code lang="astro" code={item.content} />
+      </div>
+    </div>
+
+  ) : (
+  <div>
+    {item.children.map((child) => (
+      <Astro.self item={child} />
+    ))}
+  </div>
+  )}
+</div>
+
+<style>
+  .split-show {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    width: 100%;
+  }
+  .split-preview {
+    flex-grow: 1;
+  }
+
+  .split-code {
+    width: 60ch;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: 40rem;
+    overflow: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .split-code pre {
+    background-color: #666;
+    border: 1px solid #ffffff10;
+    padding: 1rem;
+    margin: 0;
+    border-radius: 5px;
+  }
+</style>
