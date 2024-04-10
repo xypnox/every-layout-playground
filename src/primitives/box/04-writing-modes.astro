@@ -1,0 +1,32 @@
+---
+const modes = [
+  'inherit',
+  'horizontal-tb',
+  'vertical-rl',
+  'vertical-lr',
+]
+const Nums = [1, 2, 3, 4]
+---
+
+<h2>Writing Modes</h2>
+<div class="modes">
+  {modes.map(mode => (
+    <div class="mode" style={`writing-mode: ${mode}`}>
+      {mode}
+      {Nums.map(num => <div>{num}</div>)}
+    </div>
+  ))}
+</div>
+
+<style>
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1ch;
+}
+.mode {
+  border: 1px solid #444;
+  width: 30ch;
+  padding: 1ch;
+}
+</style>
