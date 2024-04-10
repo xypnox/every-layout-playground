@@ -4,10 +4,10 @@ const content = 'A very simple example of a very large paragraph. It contains a 
 
 <div class="containers">
   <div class="container">
-    <p>{content}</p>
+    <div>{content}</div>
   </div>
   <div class="container half">
-    <p>{content}</p>
+    <div>{content}</div>
   </div>
 </div>
 
@@ -15,12 +15,12 @@ const content = 'A very simple example of a very large paragraph. It contains a 
 
 .containers {
   display: flex;
+  gap: 1em;
 }
 
 .container {
   border: 1px solid #333;
   padding: 1em;
-  margin: 1em;
   flex: 2;
   height: 100%;
 }

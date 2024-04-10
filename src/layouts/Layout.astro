@@ -20,18 +20,20 @@ const { title } = Astro.props;
 	</head>
 	<body>
     <Nav />
-    <main>
-      <slot />
-    </main>
+    <slot />
+    <footer>
+      Built by <a href="https://www.xypnox.com/">xypnox</a>
+    </footer>
 	</body>
   <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
 </html>
 
 <style is:global>
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Inter', monospace;
     color: #fff;
     background-color: #000;
+    line-height: 1.5;
 	}
   body {
     margin: 0;
@@ -39,7 +41,9 @@ const { title } = Astro.props;
   }
   * {
     box-sizing: border-box;
+    scroll-margin: 7rem 0;
   }
+
 
   hr {
     border: 0;
@@ -78,6 +82,13 @@ const { title } = Astro.props;
     font-family: 'Iosevka Term', monospace;
     font-size: 1rem;
     line-height: 1.5;
+  }
+
+  footer {
+    margin-top: 6rem;
+    padding: 4rem 1rem;
+    width: 100%;
+    text-align: center;
   }
 
 </style>

@@ -1,5 +1,6 @@
 ---
 import { getFolders } from '../lib/files';
+import { capitalize } from '../lib/strings';
 
 const pathname = new URL(Astro.request.url).pathname;
 
@@ -16,11 +17,11 @@ const isActive = (path: string) => pathname.includes(path);
   <a href="/"
     class={pathname === '/' ? 'active' : ''}
   >Every Layout Playground</a>
-  <div>
+  <div class="links">
     {paths.map((path) => (
       <a href={`/chapters/${path.slug}`}
         class={isActive(path.slug) ? 'active' : ''}
-      >{path.folder}</a>
+      >{capitalize(path.folder)}</a>
     ))}
   </div>
 </nav>
@@ -32,13 +33,18 @@ nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #666;
   z-index: 10;
   background: #000;
   width: calc(100% - 2px);
   box-sizing: border-box;
-  margin-bottom: 2rem;
+  height: 3rem;
+}
+
+.links {
+  display: flex;
+  gap: 0.5rem;
 }
 
 a {

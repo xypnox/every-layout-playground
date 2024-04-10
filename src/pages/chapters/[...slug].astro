@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getFolders, readFileAsString } from '../../lib/files';
 import { Code } from 'astro:components';
 import { humanizeHeading } from '../../lib/strings';
+import Subnav from '../../component/subnav.astro';
 
 export const getStaticPaths = (async () => {
   const folders = await getFolders('src/primitives');
@@ -23,23 +24,27 @@ const fileContents = await Promise.all(files.map(async (file) => {
 }));
 
 const getFilename = (path:string) => (path.split('/').pop() ?? '').split('.').shift();
+const fileNames = files.map((file) => getFilename(file.file) ?? '');
 ---
 
 <Layout title={slug ?? 'Chapter'}>
-  {files.map((item, index) => (
-    <>
-    <div class="split-show">
-      <div class="split-preview">
-        <h2 id={getFilename(item.file)}>{humanizeHeading(getFilename(item.file) ?? '')}</h2>
-        <item.default />
+  <Subnav headings={fileNames} />
+  <main>
+    {files.map((item, index) => (
+      <>
+      <div class="split-show">
+        <div class="split-preview">
+          <h2 id={getFilename(item.file)}>{humanizeHeading(getFilename(item.file) ?? '')}</h2>
+          <item.default />
+        </div>
+        <div class="split-code">
+          <Code code={fileContents[index]} lang="astro" />
+        </div>
       </div>
-      <div class="split-code">
-        <Code code={fileContents[index]} lang="astro" />
-      </div>
-    </div>
-    {index !== files.length - 1 && <hr />}
-    </>
-  ))} 
+      {index !== files.length - 1 && <hr />}
+      </>
+    ))} 
+  </main>
 </Layout>
 
 <style>
