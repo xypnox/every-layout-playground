@@ -4,6 +4,7 @@ import { getFolders, readFileAsString } from '../../lib/files';
 import { Code } from 'astro:components';
 import { humanizeHeading } from '../../lib/strings';
 import Subnav from '../../component/subnav.astro';
+import shikiTheme from '../../../shiki.json';
 
 export const getStaticPaths = (async () => {
   const folders = await getFolders('src/primitives');
@@ -41,7 +42,7 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
           <item.default />
         </div>
         <div class="split-code">
-          <Code code={fileContents[index]} lang="astro" />
+          <Code code={fileContents[index]} theme={shikiTheme} lang="astro" />
         </div>
       </div>
       {index !== files.length - 1 && <hr />}
@@ -95,7 +96,6 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
     padding: 1rem;
     margin: 0;
     border-radius: 5px;
-    filter: saturate(0);
   }
 
   .anchor {
