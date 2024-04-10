@@ -8,7 +8,6 @@ const modes = [
 const Nums = [1, 2, 3, 4]
 ---
 
-<h2>Writing Modes</h2>
 <div class="modes">
   {modes.map(mode => (
     <div class="mode" style={`writing-mode: ${mode}`}>
@@ -22,11 +21,11 @@ const Nums = [1, 2, 3, 4]
 .modes {
   display: flex;
   flex-wrap: wrap;
-  gap: 1ch;
+  gap: 1rem;
 }
 .mode {
   border: 1px solid #444;
   width: 30ch;
-  padding: 1ch;
+  padding: 1rem;
 }
 </style>

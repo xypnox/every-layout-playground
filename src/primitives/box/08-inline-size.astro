@@ -1,0 +1,51 @@
+<p>Can also be understood as width of the element.</p>
+<div class="container content-box">
+  <p>box-sizing: content-box</p>
+  <div class="child child-100">
+    inline-size: 100%;
+  </div>
+  <div class="child child-auto">
+    inline-size: auto; (default)
+  </div>
+</div>
+
+<p>Notice how in content-box, the child with 100% inline size overflows the container.</p>
+
+<div class="container border-box">
+  <p>box-sizing: border-box</p>
+  <div class="child child-100">
+    inline-size: 100%;
+  </div>
+  <div class="child child-auto">
+    inline-size: auto; (default)
+  </div>
+</div>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 20rem;
+}
+.border-box,
+.border-box * {
+  box-sizing: border-box;
+}
+.content-box,
+.content-box * {
+  box-sizing: content-box;
+}
+.child {
+  border: 1px solid #666;
+  padding: 1rem 2rem;
+}
+.child-100 {
+  inline-size: 100%;
+}
+.child-auto {
+  inline-size: auto;
+}
+</style>

@@ -24,6 +24,7 @@ const { title } = Astro.props;
       <slot />
     </main>
 	</body>
+  <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
 </html>
 
 <style is:global>
@@ -72,6 +73,11 @@ const { title } = Astro.props;
     margin-inline: auto;
     max-width: 100%;
     align-items: center;
+  }
+  pre, code {
+    font-family: 'Iosevka Term', monospace;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
 </style>

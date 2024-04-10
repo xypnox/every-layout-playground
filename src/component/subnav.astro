@@ -1,0 +1,29 @@
+---
+import { humanizeHeading } from '../lib/strings';
+interface Props {
+  headings: string[]
+}
+
+const {headings} = Astro.props;
+
+// heading will be of the form NN-WWW-WWW
+// where NN are two digits and rest are - separated words
+// We want to convert it to a human readable form
+// Remove the numbers and replace - with space, then capitalize each word
+---
+
+<div class="page-nav">
+  <ul>
+    {headings.map(heading => (
+      <li>
+        <a href={`#${heading}`}>{humanizeHeading(heading)}</a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+</style>
+
+
+

@@ -1,0 +1,32 @@
+---
+const content = 'A very simple example of a very large paragraph. It contains a lot of words and is very long. The sentences are simple, but take up a lot of length to showcase the effects of box size depending on content.'
+---
+
+<div class="containers">
+  <div class="container">
+    <p>{content}</p>
+  </div>
+  <div class="container half">
+    <p>{content}</p>
+  </div>
+</div>
+
+<style>
+
+.containers {
+  display: flex;
+}
+
+.container {
+  border: 1px solid #333;
+  padding: 1em;
+  margin: 1em;
+  flex: 2;
+  height: 100%;
+}
+
+.container.half {
+  flex: 1;
+}
+
+</style>

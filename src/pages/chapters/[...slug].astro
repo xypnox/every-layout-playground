@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getFolders, readFileAsString } from '../../lib/files';
 import { Code } from 'astro:components';
+import { humanizeHeading } from '../../lib/strings';
 
 export const getStaticPaths = (async () => {
   const folders = await getFolders('src/primitives');
@@ -20,6 +21,8 @@ const fileContents = await Promise.all(files.map(async (file) => {
   const contents = await readFileAsString(file.file);
   return contents;
 }));
+
+const getFilename = (path:string) => (path.split('/').pop() ?? '').split('.').shift();
 ---
 
 <Layout title={slug ?? 'Chapter'}>
@@ -27,6 +30,7 @@ const fileContents = await Promise.all(files.map(async (file) => {
     <>
     <div class="split-show">
       <div class="split-preview">
+        <h2 id={getFilename(item.file)}>{humanizeHeading(getFilename(item.file) ?? '')}</h2>
         <item.default />
       </div>
       <div class="split-code">

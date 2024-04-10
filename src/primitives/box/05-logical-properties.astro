@@ -1,0 +1,60 @@
+<p>Margin Right</p>
+<div class="fixed-margin">
+  <div class="row">
+    <iconify-icon class="icon" icon="material-symbols:info-outline" width="1.2rem" height="1.2rem"></iconify-icon>
+    <div class="title">About</div>
+  </div>
+  <div class="row">
+    <iconify-icon class="icon" icon="material-symbols:info-outline" width="1.2rem" height="1.2rem"></iconify-icon>
+    <div class="title">About</div>
+  </div>
+</div>
+
+<style>
+  .fixed-margin {
+    .icon {
+      margin-right: 0.5em;
+    }
+  }
+</style>
+
+<p>Margin Inline</p>
+<div class="inline-margin">
+  <div class="row">
+    <iconify-icon class="icon" icon="material-symbols:info-outline" width="1.2rem" height="1.2rem"></iconify-icon>
+    <div class="title">About</div>
+  </div>
+  <div class="row">
+    <iconify-icon class="icon" icon="material-symbols:info-outline" width="1.2rem" height="1.2rem"></iconify-icon>
+    <div class="title">About</div>
+  </div>
+</div>
+
+<style>
+  .inline-margin {
+    .icon {
+      margin-inline-end: 0.5em;
+    }
+  }
+</style>
+
+
+<style>
+  .icon {
+    border: 1px solid #666;
+  }
+  .row:nth-child(2n) {
+    direction: rtl;
+  }
+  .row .title {
+    border: 1px solid #666;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    margin: 1rem 0;
+    width: max-content;
+    padding: 0.5rem;
+  }
+</style>
