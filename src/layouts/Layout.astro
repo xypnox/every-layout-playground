@@ -29,8 +29,11 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
+  :root {
+    --page-width: 1400px;
+  }
 	html {
-		font-family: 'Inter', monospace;
+		font-family: 'Iosevka Term', monospace;
     color: #fff;
     background-color: #000;
     line-height: 1.5;
@@ -41,7 +44,12 @@ const { title } = Astro.props;
   }
   * {
     box-sizing: border-box;
-    scroll-margin: 7rem 0;
+    scroll-margin: 8rem 0;
+  }
+  @media (max-width: 768px) {
+    * {
+      scroll-margin: 3rem 0;
+    }
   }
 
 
@@ -67,6 +75,7 @@ const { title } = Astro.props;
   }
   a {
     color: #fff;
+    text-decoration-color: #999;
   }
 	main {
 		margin: auto;
@@ -75,6 +84,7 @@ const { title } = Astro.props;
     flex-direction: column;
     gap: 2rem;
     margin-inline: auto;
+    width: var(--page-width);
     max-width: 100%;
     align-items: center;
   }

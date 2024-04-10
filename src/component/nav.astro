@@ -14,15 +14,17 @@ const isActive = (path: string) => pathname.includes(path);
 ---
 
 <nav>
-  <a href="/"
-    class={pathname === '/' ? 'active' : ''}
-  >Every Layout Playground</a>
-  <div class="links">
-    {paths.map((path) => (
-      <a href={`/chapters/${path.slug}`}
-        class={isActive(path.slug) ? 'active' : ''}
-      >{capitalize(path.folder)}</a>
-    ))}
+  <div class="innerWrapper">
+    <a href="/"
+      class={pathname === '/' ? 'active' : ''}
+    >Every Layout Playground</a>
+    <div class="links">
+      {paths.map((path) => (
+        <a href={`/chapters/${path.slug}`}
+          class={isActive(path.slug) ? 'active' : ''}
+        >{capitalize(path.folder)}</a>
+      ))}
+    </div>
   </div>
 </nav>
 
@@ -30,25 +32,39 @@ const isActive = (path: string) => pathname.includes(path);
 nav {
   position: sticky;
   top: 0;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 0.5rem;
   border-bottom: 1px solid #666;
   z-index: 10;
   background: #000;
-  width: calc(100% - 2px);
-  box-sizing: border-box;
+  width: 100%;
   height: 3rem;
+}
+
+.innerWrapper {
+  display: flex;
+  align-items: center;
+  width: var(--page-width);
+  max-width: 100%;
+  padding: 0.5rem;
+  margin-inline: auto;
+  gap: 2rem;
 }
 
 .links {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-a {
-  padding: 0.5rem;
+@media (max-width: 600px) {
+  nav {
+    justify-content: space-between;
+  }
+
+  .links a {
+    display: none;
+  }
+  .links a.active {
+    display: block;
+  }
 }
 
 a.active {

@@ -14,15 +14,17 @@ const content = 'A very simple example of a very large paragraph. It contains a 
 <style>
 
 .containers {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   gap: 1em;
+  max-width: 100%;
 }
 
 .container {
   border: 1px solid #333;
   padding: 1em;
   flex: 2;
-  height: 100%;
+  height: max-content;
 }
 
 .container.half {

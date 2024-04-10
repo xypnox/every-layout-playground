@@ -17,16 +17,10 @@ const filteredFiles = filesClone.filter((file) => {
   return file.file.includes('01-');
 });
 
-const files2 = await Promise.all(filteredFiles.map(async (file) => {
-  const contents = await readFile(file.file);
-  return contents;
-}));
-
 const getChapter = (file: string) => {
   // file /home/xypnox/Projects/learn/every-layout-playground/src/primitives/box/01-index.astro
   // chapter primitives/box
   const chapter= file.split('/').slice(-3, -1).join('/');
-  // remove .astro
   return chapter;
 }
 
@@ -35,15 +29,16 @@ const getChapter = (file: string) => {
 <Layout title="Every Layout Playground">
   <main>
     <h1>Every Layout Playground</h1>
-    {filteredFiles.map((item, index) => (
-      <>
-      <a class="chapter" href={`/chapters/${getChapter(item.file)}`}>
-        <h2>{getChapter(item.file)}</h2>
-        <item.default />
-      </a>
-      {index !== files.length - 1 && <hr />}
-      </>
-    ))} 
+    <div class="chapters">
+      {filteredFiles.map((item, index) => (
+        <a class="chapter" href={`/chapters/${getChapter(item.file)}`}>
+          <h2>{getChapter(item.file)}</h2>
+          <div class="preview">
+            <item.default />
+          </div>
+        </a>
+      ))} 
+    </div>
   </main>
 </Layout>
 
@@ -51,17 +46,41 @@ const getChapter = (file: string) => {
   h1 {
     font-size: 4rem;
   }
+  .chapters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    width: 100%;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) {
+    .chapters {
+      grid-template-columns: 1fr;
+    }
+  }
   .chapter {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
-    justify-content: center;
-    gap: 2rem;
-    width: 100%;
+    gap: 1rem;
+    height: 100%;
     flex-wrap: wrap;
     text-decoration: none;
+    width: 100%;
+    border: 1px solid #333;
+    padding: 1rem;
+  }
+
+  .chapter:hover {
+    background-color: #111;
   }
 
   .chapter h2 {
     text-decoration: underline;
+  }
+
+  .preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 </style>

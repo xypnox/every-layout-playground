@@ -1,34 +1,42 @@
-<p>Can also be understood as width of the element.</p>
-<div class="container content-box">
-  <p>box-sizing: content-box</p>
-  <div class="child child-100">
-    inline-size: 100%;
+<div class="wrapper">
+  <p>Can also be understood as width of the element.</p>
+  <div class="container content-box">
+    <p>box-sizing: content-box</p>
+    <div class="child child-100">
+      inline-size: 100%;
+    </div>
+    <div class="child child-auto">
+      inline-size: auto; (default)
+    </div>
   </div>
-  <div class="child child-auto">
-    inline-size: auto; (default)
-  </div>
-</div>
 
-<p>Notice how in content-box, the child with 100% inline size overflows the container.</p>
+  <p>Notice how in content-box, the child with 100% inline size overflows the container.</p>
 
-<div class="container border-box">
-  <p>box-sizing: border-box</p>
-  <div class="child child-100">
-    inline-size: 100%;
-  </div>
-  <div class="child child-auto">
-    inline-size: auto; (default)
+  <div class="container border-box">
+    <p>box-sizing: border-box</p>
+    <div class="child child-100">
+      inline-size: 100%;
+    </div>
+    <div class="child child-auto">
+      inline-size: auto; (default)
+    </div>
   </div>
 </div>
 
 <style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 .container {
   display: flex;
   flex-direction: column;
   border: 1px solid #333;
   gap: 1rem;
   padding: 1rem;
-  max-width: 20rem;
+  width: 16rem;
+  max-width: 90%;
 }
 .border-box,
 .border-box * {

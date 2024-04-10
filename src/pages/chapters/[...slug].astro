@@ -32,9 +32,12 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
   <main>
     {files.map((item, index) => (
       <>
-      <div class="split-show">
+      <div  id={getFilename(item.file)} class="split-show">
         <div class="split-preview">
-          <h2 id={getFilename(item.file)}>{humanizeHeading(getFilename(item.file) ?? '')}</h2>
+          <h2>
+              {humanizeHeading(getFilename(item.file) ?? '')}
+              <a href={'#' + getFilename(item.file)} class="anchor">❡</a>
+            </h2>
           <item.default />
         </div>
         <div class="split-code">
@@ -57,8 +60,14 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
     flex-wrap: wrap;
   }
   .split-preview {
-    max-width: 80ch;
-    width: 100%;
+    flex-grow: 1;
+    max-width: calc(100% - 60ch - 2rem);
+  }
+
+  @media (max-width: 800px) {
+    .split-preview {
+      max-width: 100%;
+    }
   }
 
   .split-code {
@@ -74,6 +83,12 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
     gap: 1rem;
   }
 
+  @media (max-width: 800px) {
+    .split-code {
+      max-height: 20rem;
+    }
+  }
+
   .split-code pre {
     background-color: #181818 !important;
     border: 1px solid #ffffff10;
@@ -81,5 +96,13 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
     margin: 0;
     border-radius: 5px;
     filter: saturate(0);
+  }
+
+  .anchor {
+    display: inline-block;
+    text-decoration: underline;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9em;
   }
 </style>
