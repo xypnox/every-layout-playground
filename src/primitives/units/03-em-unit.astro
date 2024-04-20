@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="bullet_unicode">&#8226;</div>
+  <div>Notice how the size of the bullet is set with em.</div>
+</div>
+
+<div class="container medium">
+  <div class="bullet_unicode">&#8226;</div>
+  <div>And how that size changes with change in container font size.</div>
+</div>
+
+<div class="container large">
+  <div class="bullet_unicode">&#8226;</div>
+  <div>This is some text</div>
+</div>
+
+
+<style>
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .bullet_unicode {
+    font-size: 1.5em;
+    margin-inline-start: 0.25em;
+  }
+
+  .medium {
+    font-size: 1.5rem;
+  }
+
+  .large {
+    font-size: 2rem;
+  }
+</style>
