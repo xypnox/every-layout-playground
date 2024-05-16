@@ -3,9 +3,10 @@ import Nav from '../component/nav.astro';
 
 interface Props {
 	title: string;
+  raw?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, raw } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,12 +20,16 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-    <Nav />
+    {!raw && (
+      <Nav />
+    )}
     <slot />
-    <footer>
-      <img src="/favicon.svg" alt="Every Layout Logo" />
-      Built by <a href="https://www.xypnox.com/">xypnox</a>
-    </footer>
+    {!raw && (
+      <footer>
+        <img src="/favicon.svg" alt="Every Layout Logo" />
+        Built by <a href="https://www.xypnox.com/">xypnox</a>
+      </footer>
+    )}
 	</body>
   <script defer src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
 </html>
@@ -59,20 +64,6 @@ const { title } = Astro.props;
     border-top: 2px dashed #333;
     width: 100%;
     margin: 2rem 0;
-  }
-  .color-swatch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem;
-    border: 1px solid #222;
-    margin: 0.25rem;
-    border-radius: 0.25rem;
-  }
-  .color-swatch .swatch {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
   }
   a {
     color: #fff;

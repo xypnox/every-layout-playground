@@ -25,6 +25,12 @@ const fileContents = await Promise.all(files.map(async (file) => {
 }));
 
 const getFilename = (path:string) => (path.split('/').pop() ?? '').split('.').shift();
+// We want everything from primitive onwards
+const getPath = (path:string) => {
+  const parts = path.split('/');
+  const index = parts.findIndex((part) => part === 'primitives');
+  return parts.slice(index).join('/').replace('.astro', '');
+};
 const fileNames = files.map((file) => getFilename(file.file) ?? '');
 ---
 
@@ -38,8 +44,11 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
           <h2>
               {humanizeHeading(getFilename(item.file) ?? '')}
               <a href={'#' + getFilename(item.file)} class="anchor">❡</a>
-            </h2>
-          <item.default />
+              <a href={'/raw/' + getPath(item.file)} class="anchor">
+                <iconify-icon data-icon="akar-icons:code" data-inline="false"></iconify-icon>
+              </a>
+          </h2>
+            <iframe src={'/raw/' + getPath(item.file)} data-playground-styles width="100%" height="500px" />
         </div>
         <div class="split-code">
           <Code code={fileContents[index]} theme={shikiTheme} lang="astro" />
@@ -104,5 +113,11 @@ const fileNames = files.map((file) => getFilename(file.file) ?? '');
     color: #888;
     text-decoration: none;
     font-size: 0.9em;
+  }
+
+  iframe {
+    border: 1px dashed #666;
+    border-radius: 0.5em;
+    padding: 1rem;
   }
 </style>
